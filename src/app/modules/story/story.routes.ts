@@ -4,12 +4,13 @@ import { USER_ROLE } from '../user/user.constant';
 import { uploadFile } from '../../helper/fileUploader';
 import validateRequest from '../../middlewares/validateRequest';
 import StoryController from './story.controller';
+import storyValidations from './story.validation';
 
 const router = express.Router();
 
 router.post(
-  '/create-blog',
-  auth(USER_ROLE.superAdmin),
+  '/create-story',
+  auth(USER_ROLE.user),
   uploadFile(),
   (req: Request, res: Response, next: NextFunction) => {
     if (req.body.data) {
@@ -17,20 +18,21 @@ router.post(
     }
     next();
   },
+  validateRequest(storyValidations.createStoryValidationSchema),
   StoryController.createStory,
 );
 router.patch(
-  '/update-blog',
-  auth(USER_ROLE.superAdmin),
-  validateRequest(blogValidations.updateBlogValidationSchema),
-  BlogController.updateBlog,
+  '/update-story',
+  auth(USER_ROLE.user),
+  validateRequest(storyValidations.updateStoryValidationSchema),
+  StoryController.updateStory,
 );
-router.get('/all-blogs', BlogController.getAllBlog);
-router.post('/single-blog', BlogController.getSingleBlog);
+router.get('/all-story', StoryController.getAllStory);
+router.post('/single-story', StoryController.getSingleStory);
 router.delete(
-  '/delete-blog/:id',
-  auth(USER_ROLE.superAdmin),
-  BlogController.deleteSingleBlog,
+  '/delete-story/:id',
+  auth(USER_ROLE.user),
+  StoryController.deleteSingleStory,
 );
 
 export const blogRoutes = router;

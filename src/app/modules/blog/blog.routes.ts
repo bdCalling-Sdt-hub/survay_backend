@@ -3,6 +3,8 @@ import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../user/user.constant';
 import BlogController from './blog.controller';
 import { uploadFile } from '../../helper/fileUploader';
+import validateRequest from '../../middlewares/validateRequest';
+import blogValidations from './blog.validation';
 
 const router = express.Router();
 
@@ -21,6 +23,7 @@ router.post(
 router.patch(
   '/update-blog',
   auth(USER_ROLE.superAdmin),
+  validateRequest(blogValidations.updateBlogValidationSchema),
   BlogController.updateBlog,
 );
 router.get('/all-blogs', BlogController.getAllBlog);

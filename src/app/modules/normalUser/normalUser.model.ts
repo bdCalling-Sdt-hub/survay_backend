@@ -17,14 +17,26 @@ const NormalUserSchema = new Schema<INormalUser>(
       // required: true,
       // unique: true,
     },
+    profession: {
+      type: String,
+    },
+    education: {
+      type: String,
+    },
+    dateOfBirth: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,
       unique: true,
     },
-    address: {
+    country: {
       type: String,
       // required: true,
+    },
+    city: {
+      type: String,
     },
     profile_image: {
       type: String,

@@ -64,7 +64,7 @@ const deleteSingleStory = catchAsync(async (req, res) => {
   });
 });
 
-const BlogController = {
+const StoryController = {
   createStory,
   getAllStory,
   getSingleStory,
@@ -72,4 +72,4 @@ const BlogController = {
   deleteSingleStory,
 };
 
-export default BlogController;
+export default StoryController;

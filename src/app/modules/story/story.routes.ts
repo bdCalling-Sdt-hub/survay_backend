@@ -3,6 +3,7 @@ import auth from '../../middlewares/auth';
 import { USER_ROLE } from '../user/user.constant';
 import { uploadFile } from '../../helper/fileUploader';
 import validateRequest from '../../middlewares/validateRequest';
+import StoryController from './story.controller';
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.post(
     }
     next();
   },
-  BlogController.createBlog,
+  StoryController.createStory,
 );
 router.patch(
   '/update-blog',

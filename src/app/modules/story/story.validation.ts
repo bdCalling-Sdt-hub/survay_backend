@@ -25,9 +25,9 @@ const updateStoryValidationSchema = z.object({
   }),
 });
 
-const blogValidations = {
+const storyValidations = {
   createStoryValidationSchema,
   updateStoryValidationSchema,
 };
 
-export default blogValidations;
+export default storyValidations;

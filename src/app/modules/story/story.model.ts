@@ -26,6 +26,7 @@ const StorySchema = new Schema<IStory>(
     status: {
       type: String,
       enum: Object.values(ENUM_STORY_STATUS),
+      default: ENUM_STORY_STATUS.PENDING,
     },
   },
   {

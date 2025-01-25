@@ -4,6 +4,7 @@ import QueryBuilder from '../../builder/QueryBuilder';
 import unlinkFile from '../../helper/unLinkFile';
 import { IStory } from './story.interface';
 import Story from './story.model';
+import { ENUM_STORY_STATUS } from '../../utilities/enum';
 
 const createStory = async (profileId: string, payload: IStory) => {
   const result = await Story.create({ ...payload, author: profileId });
@@ -65,12 +66,26 @@ const deleteSingleStory = async (profileId: string, id: string) => {
   return result;
 };
 
+const approveStory = async (id: string) => {
+  const story = await Story.findById(id);
+  if (!story) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Story not found');
+  }
+  const result = await Story.findByIdAndUpdate(
+    id,
+    { status: ENUM_STORY_STATUS.APPROVED },
+    { new: true, runValidators: true },
+  );
+  return result;
+};
+
 const StoryService = {
   createStory,
   updateStory,
   getAllStory,
   getSingleStory,
   deleteSingleStory,
+  approveStory,
 };
 
 export default StoryService;

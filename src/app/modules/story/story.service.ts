@@ -10,8 +10,12 @@ const createStory = async (profileId: string, payload: IStory) => {
   return result;
 };
 
-const updateStory = async (id: string, payload: Partial<IStory>) => {
-  const story = await Story.findById(id);
+const updateStory = async (
+  profileId: string,
+  id: string,
+  payload: Partial<IStory>,
+) => {
+  const story = await Story.findOne({ _id: id, author: profileId });
   if (!story) {
     throw new AppError(httpStatus.NOT_FOUND, 'Story not found');
   }
@@ -61,7 +65,7 @@ const deleteSingleStory = async (profileId: string, id: string) => {
   return result;
 };
 
-const BlogService = {
+const StoryService = {
   createStory,
   updateStory,
   getAllStory,
@@ -69,4 +73,4 @@ const BlogService = {
   deleteSingleStory,
 };
 
-export default BlogService;
+export default StoryService;

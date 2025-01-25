@@ -66,7 +66,6 @@ const getUserChartData = async (year: number) => {
     totalUser:
       chartData.find((item) => item.month === index + 1)?.totalUser || 0,
   }));
-
   return data;
 };
 

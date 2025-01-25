@@ -28,7 +28,7 @@ const updateBlog = async (id: string, payload: Partial<IBlog>) => {
 
 const getAllBlog = async (query: Record<string, unknown>) => {
   const blogQuery = new QueryBuilder(Blog.find(), query)
-    .search(['description'])
+    .search(['description', 'hashtag'])
     .fields()
     .filter()
     .paginate()

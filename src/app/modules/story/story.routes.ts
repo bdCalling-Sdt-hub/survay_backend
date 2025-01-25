@@ -35,4 +35,10 @@ router.delete(
   StoryController.deleteSingleStory,
 );
 
+router.patch(
+  '/approve-story/:id',
+  auth(USER_ROLE.superAdmin),
+  StoryController.approveStory,
+);
+
 export const storyRoutes = router;

@@ -10,7 +10,7 @@ const createStory = catchAsync(async (req, res) => {
   }
   const result = await StoryService.createStory(req.user.profileId, req.body);
   sendResponse(res, {
-    statusCode: httpStatus.OK,
+    statusCode: httpStatus.CREATED,
     success: true,
     message: 'Story created successfully',
     data: result,
@@ -63,6 +63,15 @@ const deleteSingleStory = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const approveStory = catchAsync(async (req, res) => {
+  const result = await StoryService.approveStory(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Story approved successfully',
+    data: result,
+  });
+});
 
 const StoryController = {
   createStory,
@@ -70,6 +79,7 @@ const StoryController = {
   getSingleStory,
   updateStory,
   deleteSingleStory,
+  approveStory,
 };
 
 export default StoryController;

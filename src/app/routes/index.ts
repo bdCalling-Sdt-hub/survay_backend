@@ -7,6 +7,7 @@ import { normalUserRoutes } from '../modules/normalUser/normalUser.routes';
 import { notificationRoutes } from '../modules/notification/notification.routes';
 import { blogRoutes } from '../modules/blog/blog.routes';
 import { storyRoutes } from '../modules/story/story.routes';
+import { metaRoutes } from '../modules/meta/meta.routes';
 
 const router = Router();
 
@@ -39,6 +40,10 @@ const moduleRoutes = [
   {
     path: '/story',
     router: storyRoutes,
+  },
+  {
+    path: '/meta',
+    router: metaRoutes,
   },
 ];
 

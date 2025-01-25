@@ -4,11 +4,8 @@ import { INormalUser } from './normalUser.interface';
 import NormalUser from './normalUser.model';
 
 const updateUserProfile = async (id: string, payload: Partial<INormalUser>) => {
-  if (payload.email || payload.username) {
-    throw new AppError(
-      httpStatus.BAD_REQUEST,
-      'You can not change the email or username',
-    );
+  if (payload.email) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'You can not change the email');
   }
 
   const user = await NormalUser.findById(id);

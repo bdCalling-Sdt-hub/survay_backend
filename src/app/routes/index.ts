@@ -6,6 +6,7 @@ import { normalUserRoutes } from '../modules/normalUser/normalUser.routes';
 
 import { notificationRoutes } from '../modules/notification/notification.routes';
 import { blogRoutes } from '../modules/blog/blog.routes';
+import { storyRoutes } from '../modules/story/story.routes';
 
 const router = Router();
 
@@ -34,6 +35,10 @@ const moduleRoutes = [
   {
     path: '/blog',
     router: blogRoutes,
+  },
+  {
+    path: '/story',
+    router: storyRoutes,
   },
 ];
 

@@ -35,4 +35,4 @@ router.delete(
   StoryController.deleteSingleStory,
 );
 
-export const blogRoutes = router;
+export const storyRoutes = router;

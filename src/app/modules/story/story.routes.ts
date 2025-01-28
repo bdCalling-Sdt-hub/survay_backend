@@ -31,7 +31,7 @@ router.get('/all-story', StoryController.getAllStory);
 router.post('/single-story', StoryController.getSingleStory);
 router.delete(
   '/delete-story/:id',
-  auth(USER_ROLE.user),
+  auth(USER_ROLE.user, USER_ROLE.superAdmin),
   StoryController.deleteSingleStory,
 );
 

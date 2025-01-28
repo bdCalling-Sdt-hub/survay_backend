@@ -8,6 +8,7 @@ import { notificationRoutes } from '../modules/notification/notification.routes'
 import { blogRoutes } from '../modules/blog/blog.routes';
 import { storyRoutes } from '../modules/story/story.routes';
 import { metaRoutes } from '../modules/meta/meta.routes';
+import { whyRoutes } from '../modules/why/why.routes';
 
 const router = Router();
 
@@ -44,6 +45,10 @@ const moduleRoutes = [
   {
     path: '/meta',
     router: metaRoutes,
+  },
+  {
+    path: '/why',
+    router: whyRoutes,
   },
 ];
 

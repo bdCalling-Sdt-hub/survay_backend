@@ -27,7 +27,7 @@ router.patch(
   BlogController.updateBlog,
 );
 router.get('/all-blogs', BlogController.getAllBlog);
-router.post('/single-blog', BlogController.getSingleBlog);
+router.post('/single-blog/:id', BlogController.getSingleBlog);
 router.delete(
   '/delete-blog/:id',
   auth(USER_ROLE.superAdmin),

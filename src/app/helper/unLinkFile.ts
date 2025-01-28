@@ -3,10 +3,9 @@ import path from 'path';
 
 const unlinkFile = (filePath: string) => {
   const fullPath = path.join(process.cwd(), filePath);
-
-  // Check if the file exists
+  // Check if the file exists----
   if (fs.existsSync(fullPath)) {
-    // Unlink the file if it exists
+    // Unlink the file if it exists---------
     fs.unlink(fullPath, (err) => {
       if (err) {
         console.error(`Error deleting file: ${filePath}`, err);

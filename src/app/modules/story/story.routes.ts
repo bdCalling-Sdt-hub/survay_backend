@@ -28,13 +28,12 @@ router.patch(
   StoryController.updateStory,
 );
 router.get('/all-story', StoryController.getAllStory);
-router.post('/single-story', StoryController.getSingleStory);
+router.get('/single-story/:id', StoryController.getSingleStory);
 router.delete(
   '/delete-story/:id',
   auth(USER_ROLE.user, USER_ROLE.superAdmin),
   StoryController.deleteSingleStory,
 );
-
 router.patch(
   '/approve-story/:id',
   auth(USER_ROLE.superAdmin),

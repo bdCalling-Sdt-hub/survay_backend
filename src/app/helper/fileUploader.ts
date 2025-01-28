@@ -10,10 +10,10 @@ export const uploadFile = () => {
 
       if (file.fieldname === 'profile_image') {
         uploadPath = 'uploads/images/profile';
-      } else if (file.fieldname === 'category_image') {
-        uploadPath = 'uploads/images/category';
-      } else if (file.fieldname === 'league_image') {
-        uploadPath = 'uploads/images/league_image';
+      } else if (file.fieldname === 'blog_image') {
+        uploadPath = 'uploads/images/blog';
+      } else if (file.fieldname === 'story_image') {
+        uploadPath = 'uploads/images/story';
       } else if (file.fieldname === 'team_logo') {
         uploadPath = 'uploads/images/team_logo';
       } else if (file.fieldname === 'team_bg_image') {
@@ -55,8 +55,8 @@ export const uploadFile = () => {
     const allowedFieldnames = [
       'image',
       'profile_image',
-      'league_image',
-      'category_image',
+      'blog_image',
+      'story_image',
       'team_logo',
       'team_bg_image',
       'player_image',
@@ -91,8 +91,8 @@ export const uploadFile = () => {
   }).fields([
     { name: 'image', maxCount: 1 },
     { name: 'profile_image', maxCount: 1 },
-    { name: 'category_image', maxCount: 1 },
-    { name: 'sub_category_image', maxCount: 1 },
+    { name: 'blog_image', maxCount: 1 },
+    { name: 'story_image', maxCount: 1 },
     { name: 'league_image', maxCount: 5 },
     { name: 'team_logo', maxCount: 1 },
     { name: 'team_bg_image', maxCount: 1 },

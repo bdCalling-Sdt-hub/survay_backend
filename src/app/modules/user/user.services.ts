@@ -139,7 +139,6 @@ const resendVerifyCode = async (email: string) => {
 
 const getMyProfile = async (userData: JwtPayload) => {
   let result = null;
-  console.log('userdata', userData);
   if (userData.role === USER_ROLE.user) {
     result = await NormalUser.findOne({ email: userData.email });
   } else if (userData.role === USER_ROLE.superAdmin) {

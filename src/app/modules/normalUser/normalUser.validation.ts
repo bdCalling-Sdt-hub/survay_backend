@@ -10,9 +10,7 @@ export const createNormalUserSchema = z.object({
       .min(6, { message: 'Password must be 6 character' }),
     userData: z.object({
       name: z.string().nonempty('Name is required'),
-      phone: z.string().optional(),
       email: z.string().email('Invalid email format'),
-      address: z.string().nonempty('Address is required').optional(),
     }),
   }),
 });

@@ -2,6 +2,7 @@ import httpStatus from 'http-status';
 import AppError from '../../error/appError';
 import { INormalUser } from './normalUser.interface';
 import NormalUser from './normalUser.model';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const updateUserProfile = async (id: string, payload: Partial<INormalUser>) => {
   if (payload.email) {
@@ -19,8 +20,29 @@ const updateUserProfile = async (id: string, payload: Partial<INormalUser>) => {
   return result;
 };
 
+const getAllNormalUser = async (query: Record<string, unknown>) => {
+  const normalUserQury = new QueryBuilder(
+    NormalUser.find().populate({ path: 'user', select: 'status' }),
+    query,
+  )
+    .search(['name'])
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const meta = await normalUserQury.countTotal();
+  const result = await normalUserQury.modelQuery;
+
+  return {
+    meta,
+    result,
+  };
+};
+
 const NormalUserServices = {
   updateUserProfile,
+  getAllNormalUser,
 };
 
 export default NormalUserServices;

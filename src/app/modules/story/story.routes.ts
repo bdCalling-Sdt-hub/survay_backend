@@ -22,7 +22,7 @@ router.post(
   StoryController.createStory,
 );
 router.patch(
-  '/update-story',
+  '/update-story/:id',
   auth(USER_ROLE.user),
   validateRequest(storyValidations.updateStoryValidationSchema),
   StoryController.updateStory,

@@ -21,13 +21,20 @@ router.post(
   BlogController.createBlog,
 );
 router.patch(
-  '/update-blog',
+  '/update-blog/:id',
   auth(USER_ROLE.superAdmin),
+  uploadFile(),
+  (req: Request, res: Response, next: NextFunction) => {
+    if (req.body.data) {
+      req.body = JSON.parse(req.body.data);
+    }
+    next();
+  },
   validateRequest(blogValidations.updateBlogValidationSchema),
   BlogController.updateBlog,
 );
 router.get('/all-blogs', BlogController.getAllBlog);
-router.post('/single-blog/:id', BlogController.getSingleBlog);
+router.get('/single-blog/:id', BlogController.getSingleBlog);
 router.delete(
   '/delete-blog/:id',
   auth(USER_ROLE.superAdmin),

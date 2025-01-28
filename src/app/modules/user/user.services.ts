@@ -5,13 +5,16 @@ import AppError from '../../error/appError';
 import httpStatus from 'http-status';
 import { INormalUser } from '../normalUser/normalUser.interface';
 import mongoose from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser, TUserRole } from './user.interface';
 import { USER_ROLE } from './user.constant';
 import NormalUser from '../normalUser/normalUser.model';
 import registrationSuccessEmailBody from '../../mailTemplate/registerSucessEmail';
 import cron from 'node-cron';
 import sendEmail from '../../utilities/sendEmail';
 import { JwtPayload } from 'jsonwebtoken';
+import config from '../../config';
+import { createToken } from './user.utils';
+import SuperAdmin from '../superAdmin/superAdmin.model';
 const generateVerifyCode = (): number => {
   return Math.floor(10000 + Math.random() * 90000);
 };
@@ -83,13 +86,30 @@ const verifyCode = async (email: string, verifyCode: number) => {
   if (verifyCode !== user.verifyCode) {
     throw new AppError(httpStatus.BAD_REQUEST, "Code doesn't match");
   }
-  const result = await User.findOneAndUpdate(
+  await User.findOneAndUpdate(
     { email: email },
     { isVerified: true },
     { new: true, runValidators: true },
   );
-
-  return result;
+  const jwtPayload = {
+    id: user?._id,
+    email: user?.email,
+    role: user?.role as TUserRole,
+  };
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+  const refreshToken = createToken(
+    jwtPayload,
+    config.jwt_refresh_secret as string,
+    config.jwt_refresh_expires_in as string,
+  );
+  return {
+    accessToken,
+    refreshToken,
+  };
 };
 
 const resendVerifyCode = async (email: string) => {
@@ -119,8 +139,11 @@ const resendVerifyCode = async (email: string) => {
 
 const getMyProfile = async (userData: JwtPayload) => {
   let result = null;
+  console.log('userdata', userData);
   if (userData.role === USER_ROLE.user) {
     result = await NormalUser.findOne({ email: userData.email });
+  } else if (userData.role === USER_ROLE.superAdmin) {
+    result = await SuperAdmin.findOne({ email: userData.email });
   }
   return result;
 };

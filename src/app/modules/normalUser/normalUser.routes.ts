@@ -21,5 +21,10 @@ router.patch(
   validateRequest(normalUserValidations.updateNormalUserData),
   NormalUserController.updateUserProfile,
 );
+router.get(
+  '/get-all',
+  auth(USER_ROLE.superAdmin),
+  NormalUserController.getAllNormalUser,
+);
 
 export const normalUserRoutes = router;

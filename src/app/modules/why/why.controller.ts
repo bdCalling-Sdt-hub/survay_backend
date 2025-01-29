@@ -15,9 +15,19 @@ const generateWhyOverview = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getAllWhy = catchAsync(async (req, res) => {
+  const result = await WhyService.getAllWhy(req.query);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Why retrieved successfully',
+    data: result,
+  });
+});
 
 const WhyController = {
   generateWhyOverview,
+  getAllWhy,
 };
 
 export default WhyController;

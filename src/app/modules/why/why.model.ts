@@ -36,6 +36,6 @@ const WhySchema = new Schema<IWhy>({
   finalSummary: { type: String, required: true },
 });
 
-const ProfileModel = mongoose.model<IWhy>('Why', WhySchema);
+const Why = mongoose.model<IWhy>('Why', WhySchema);
 
-export default ProfileModel;
+export default Why;

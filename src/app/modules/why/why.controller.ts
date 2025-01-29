@@ -33,11 +33,21 @@ const getMyWhy = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const deleteWhy = catchAsync(async (req, res) => {
+  const result = await WhyService.deleteWhy(req.user.profileId, req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Why deleted successfully',
+    data: result,
+  });
+});
 
 const WhyController = {
   generateWhyOverview,
   getAllWhy,
   getMyWhy,
+  deleteWhy,
 };
 
 export default WhyController;

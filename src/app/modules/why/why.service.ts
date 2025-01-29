@@ -2,6 +2,8 @@ import OpenAI from 'openai';
 import config from '../../config';
 import Why from './why.model';
 import QueryBuilder from '../../builder/QueryBuilder';
+import AppError from '../../error/appError';
+import httpStatus from 'http-status';
 const openai = new OpenAI({
   apiKey: config.open_ai_api_key,
 });
@@ -420,10 +422,24 @@ const getMyWhy = async (profileId: string) => {
   return result;
 };
 
+const deleteWhy = async (profileId: string, whyId: string) => {
+  const why = await Why.findOne({ user: profileId, _id: whyId });
+
+  if (!why) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'Why not found that you want to delete',
+    );
+  }
+  const result = await Why.findByIdAndDelete(whyId);
+  return result;
+};
+
 const WhyService = {
   generateWhyOverview,
   getAllWhy,
   getMyWhy,
+  deleteWhy,
 };
 
 export default WhyService;

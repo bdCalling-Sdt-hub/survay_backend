@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export interface IStrength {
   title: string;
   description: string;
@@ -14,6 +16,7 @@ export interface IProgressBarData {
 }
 
 export interface IWhy {
+  user: Types.ObjectId;
   initialSummary: string;
   keyPoints: string[];
   strengths: IStrength[];

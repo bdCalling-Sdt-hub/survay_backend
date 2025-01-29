@@ -22,6 +22,11 @@ const ProgressBarDataSchema: Schema = new Schema<IProgressBarData>({
 });
 
 const WhySchema = new Schema<IWhy>({
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'NormalUser',
+  },
   initialSummary: { type: String, required: true },
   keyPoints: { type: [String], required: true },
   strengths: { type: [StrengthSchema], required: true },

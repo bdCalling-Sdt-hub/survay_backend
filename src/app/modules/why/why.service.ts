@@ -1,10 +1,18 @@
 import OpenAI from 'openai';
 import config from '../../config';
+import Why from './why.model';
+import QueryBuilder from '../../builder/QueryBuilder';
 const openai = new OpenAI({
   apiKey: config.open_ai_api_key,
 });
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const generateWhyOverview = async () => {
+
+interface qa {
+  question: string;
+  answer: string;
+}
+const generateWhyOverview = async (profileId: string, questionAnswer: qa[]) => {
+  console.log('question and anws', questionAnswer);
   const practicalLifeQA = [
     {
       question: 'What am I passionate about?',
@@ -334,6 +342,8 @@ const generateWhyOverview = async () => {
     const parsedData = JSON.parse(
       response.choices[0].message.content as string,
     );
+    // save why in database with user
+    await Why.create({ ...parsedData, user: profileId });
     console.log('Formatted JSON Output:', parsedData);
     return parsedData;
   } catch (error) {
@@ -389,8 +399,25 @@ function generatePrompt(
   return prompt;
 }
 
+const getAllWhy = async (query: Record<string, unknown>) => {
+  const whyQuery = new QueryBuilder(Why.find(), query)
+    .search(['title', 'description'])
+    .fields()
+    .filter()
+    .paginate()
+    .sort();
+
+  const result = await whyQuery.modelQuery;
+  const meta = await whyQuery.countTotal();
+  return {
+    meta,
+    result,
+  };
+};
+
 const WhyService = {
   generateWhyOverview,
+  getAllWhy,
 };
 
 export default WhyService;

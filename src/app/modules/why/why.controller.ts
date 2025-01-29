@@ -4,11 +4,14 @@ import sendResponse from '../../utilities/sendResponse';
 import WhyService from './why.service';
 
 const generateWhyOverview = catchAsync(async (req, res) => {
-  const result = await WhyService.generateWhyOverview();
+  const result = await WhyService.generateWhyOverview(
+    req.user.profileId,
+    req.body.questionAnswer,
+  );
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
     success: true,
-    message: 'why overview generated successfully',
+    message: 'Why overview generated successfully',
     data: result,
   });
 });

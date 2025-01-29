@@ -415,9 +415,15 @@ const getAllWhy = async (query: Record<string, unknown>) => {
   };
 };
 
+const getMyWhy = async (profileId: string) => {
+  const result = await Why.find({ user: profileId });
+  return result;
+};
+
 const WhyService = {
   generateWhyOverview,
   getAllWhy,
+  getMyWhy,
 };
 
 export default WhyService;

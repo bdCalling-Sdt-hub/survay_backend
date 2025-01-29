@@ -1,11 +1,11 @@
 import NormalUser from '../normalUser/normalUser.model';
 import Story from '../story/story.model';
+import Why from '../why/why.model';
 
 const getDashboardMetaData = async () => {
   const totalUser = await NormalUser.countDocuments();
   const totalStory = await Story.countDocuments();
-  // need to dynamic the why
-  const totalWhy = 200;
+  const totalWhy = Why.countDocuments();
 
   return {
     totalUser,

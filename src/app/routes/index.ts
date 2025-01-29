@@ -9,6 +9,7 @@ import { blogRoutes } from '../modules/blog/blog.routes';
 import { storyRoutes } from '../modules/story/story.routes';
 import { metaRoutes } from '../modules/meta/meta.routes';
 import { whyRoutes } from '../modules/why/why.routes';
+import { superAdminRoutes } from '../modules/superAdmin/superAdmin.routes';
 
 const router = Router();
 
@@ -24,6 +25,10 @@ const moduleRoutes = [
   {
     path: '/normal-user',
     router: normalUserRoutes,
+  },
+  {
+    path: '/super-admin',
+    router: superAdminRoutes,
   },
 
   {

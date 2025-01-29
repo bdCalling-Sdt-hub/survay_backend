@@ -1,14 +1,14 @@
-interface Strength {
+export interface IStrength {
   title: string;
   description: string;
 }
 
-interface PieChartData {
+export interface IPieChartData {
   category: string;
   percentage: number;
 }
 
-interface ProgressBarData {
+export interface IProgressBarData {
   label: string;
   percentage: number;
 }
@@ -16,9 +16,9 @@ interface ProgressBarData {
 export interface IWhy {
   initialSummary: string;
   keyPoints: string[];
-  strengths: Strength[];
+  strengths: IStrength[];
   weaknesses: string[];
-  pieChartData: PieChartData[];
-  progressBarData: ProgressBarData[];
+  pieChartData: IPieChartData[];
+  progressBarData: IProgressBarData[];
   finalSummary: string;
 }

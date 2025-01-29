@@ -22,6 +22,8 @@ app.use(
   cors({
     origin: [
       'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:5175',
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:3002',
@@ -31,6 +33,7 @@ app.use(
       'http://localhost:3006',
       'http://localhost:3007',
       'http://localhost:3008',
+      'http://10.0.60.24:3002',
     ],
     credentials: true,
   }),

@@ -330,7 +330,12 @@ const generateWhyOverview = async () => {
     });
 
     console.log(response.choices[0].message.content);
-    return response.choices[0].message.content;
+    // return response.choices[0].message.content;
+    const parsedData = JSON.parse(
+      response.choices[0].message.content as string,
+    );
+    console.log('Formatted JSON Output:', parsedData);
+    return parsedData;
   } catch (error) {
     console.error('Error generating overview:', error);
     throw error;

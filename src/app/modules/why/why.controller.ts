@@ -24,10 +24,20 @@ const getAllWhy = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getMyWhy = catchAsync(async (req, res) => {
+  const result = await WhyService.getMyWhy(req.user.profileId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Why retrieved successfully',
+    data: result,
+  });
+});
 
 const WhyController = {
   generateWhyOverview,
   getAllWhy,
+  getMyWhy,
 };
 
 export default WhyController;

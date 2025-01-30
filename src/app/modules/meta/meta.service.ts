@@ -1,3 +1,4 @@
+import Blog from '../blog/blog.model';
 import NormalUser from '../normalUser/normalUser.model';
 import Story from '../story/story.model';
 import Why from '../why/why.model';
@@ -5,12 +6,13 @@ import Why from '../why/why.model';
 const getDashboardMetaData = async () => {
   const totalUser = await NormalUser.countDocuments();
   const totalStory = await Story.countDocuments();
-  const totalWhy = Why.countDocuments();
-
+  const totalWhy = await Why.countDocuments();
+  const totalBlog = await Blog.countDocuments();
   return {
     totalUser,
     totalStory,
     totalWhy,
+    totalBlog,
   };
 };
 

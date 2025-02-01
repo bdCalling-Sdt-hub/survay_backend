@@ -345,9 +345,9 @@ const generateWhyOverview = async (profileId: string, questionAnswer: qa[]) => {
       response.choices[0].message.content as string,
     );
     // save why in database with user
-    await Why.create({ ...parsedData, user: profileId });
+    const result = await Why.create({ ...parsedData, user: profileId });
     console.log('Formatted JSON Output:', parsedData);
-    return parsedData;
+    return result;
   } catch (error) {
     console.error('Error generating overview:', error);
     throw error;
@@ -402,7 +402,13 @@ function generatePrompt(
 }
 
 const getAllWhy = async (query: Record<string, unknown>) => {
-  const whyQuery = new QueryBuilder(Why.find(), query)
+  const whyQuery = new QueryBuilder(
+    Why.find().populate({
+      path: 'user',
+      select: 'name profile_image phone email',
+    }),
+    query,
+  )
     .search(['title', 'description'])
     .fields()
     .filter()

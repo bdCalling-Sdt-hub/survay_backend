@@ -13,7 +13,6 @@ const myFormat = printf(({ level, message, label, timestamp }: any) => {
 
   return `${date.toDateString()} ${h}:${m} ${s} [${label}] ${level}: ${message}`;
 });
-
 const logDir = path.join(process.cwd(), 'logs', 'winston');
 
 export const logger = createLogger({

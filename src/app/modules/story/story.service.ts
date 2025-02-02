@@ -50,7 +50,10 @@ const getAllStory = async (query: Record<string, unknown>) => {
   };
 };
 const getSingleStory = async (id: string) => {
-  const result = await Story.findById(id);
+  const result = await Story.findById(id).populate({
+    path: 'author',
+    select: 'name profile_image',
+  });
   return result;
 };
 

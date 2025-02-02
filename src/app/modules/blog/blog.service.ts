@@ -20,15 +20,15 @@ const updateBlog = async (id: string, payload: Partial<IBlog>) => {
     runValidators: true,
   });
 
-  if (payload.blog_image) {
-    unlinkFile(payload.blog_image);
+  if (blog.blog_image) {
+    unlinkFile(blog.blog_image);
   }
   return result;
 };
 
 const getAllBlog = async (query: Record<string, unknown>) => {
   const blogQuery = new QueryBuilder(Blog.find(), query)
-    .search(['description', 'hashtag'])
+    .search(['title', 'hashtag'])
     .fields()
     .filter()
     .paginate()

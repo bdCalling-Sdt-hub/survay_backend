@@ -25,8 +25,8 @@ const updateStory = async (
     runValidators: true,
   });
 
-  if (payload.story_image) {
-    unlinkFile(payload.story_image);
+  if (story.story_image) {
+    unlinkFile(story.story_image);
   }
   return result;
 };
@@ -55,9 +55,9 @@ const getSingleStory = async (id: string) => {
 };
 
 const deleteSingleStory = async (profileId: string, id: string) => {
-  const story = await Story.findOne({ author: profileId, _id: id });
+  const story = await Story.findOne({ _id: id });
   if (!story) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Blog not found');
+    throw new AppError(httpStatus.NOT_FOUND, 'Story not found');
   }
   const result = await Story.findByIdAndDelete(id);
   if (story.story_image) {

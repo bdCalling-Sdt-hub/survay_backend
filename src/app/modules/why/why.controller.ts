@@ -33,6 +33,15 @@ const getMyWhy = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getSingleWhy = catchAsync(async (req, res) => {
+  const result = await WhyService.getSingleWhy(req.params.id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Why retrieved successfully',
+    data: result,
+  });
+});
 const deleteWhy = catchAsync(async (req, res) => {
   const result = await WhyService.deleteWhy(req.user.profileId, req.params.id);
   sendResponse(res, {
@@ -48,6 +57,7 @@ const WhyController = {
   getAllWhy,
   getMyWhy,
   deleteWhy,
+  getSingleWhy,
 };
 
 export default WhyController;

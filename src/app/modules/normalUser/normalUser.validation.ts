@@ -11,6 +11,7 @@ export const createNormalUserSchema = z.object({
     userData: z.object({
       name: z.string().nonempty('Name is required'),
       email: z.string().email('Invalid email format'),
+      phone: z.string({ required_error: 'Phone number is required' }),
     }),
   }),
 });

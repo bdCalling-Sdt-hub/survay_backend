@@ -11,5 +11,6 @@ export interface INormalUser {
   email: string;
   country: string;
   city: string;
-  profile_image: string;  
+  subscriptionEmail: string;
+  profile_image: string;
 }

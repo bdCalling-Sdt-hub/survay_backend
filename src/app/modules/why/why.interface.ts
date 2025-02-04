@@ -15,13 +15,21 @@ export interface IProgressBarData {
   percentage: number;
 }
 
+export interface ICourseSuggestions {
+  title: string;
+  description: string;
+  platform: string;
+  link: string;
+}
+
 export interface IWhy {
   user: Types.ObjectId;
   initialSummary: string;
   keyPoints: string[];
   strengths: IStrength[];
-  weaknesses: string[];
+  weaknesses: IStrength[];
   pieChartData: IPieChartData[];
   progressBarData: IProgressBarData[];
   finalSummary: string;
+  courseSuggestions: ICourseSuggestions[];
 }

@@ -42,6 +42,10 @@ const NormalUserSchema = new Schema<INormalUser>(
       type: String,
       default: '',
     },
+    subscriptionEmail: {
+      type: String,
+      default: '',
+    },
   },
   {
     timestamps: true,

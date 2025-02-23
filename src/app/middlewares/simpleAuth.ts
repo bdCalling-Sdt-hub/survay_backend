@@ -40,7 +40,6 @@ const simpleAuth = async (req: Request, res: Response, next: NextFunction) => {
       } else if (role === USER_ROLE.superAdmin) {
         profileData = await SuperAdmin.findOne({ user: id }).select('_id');
       }
-
       if (profileData) {
         decoded.profileId = profileData._id;
       }

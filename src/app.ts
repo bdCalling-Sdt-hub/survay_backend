@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import express, { Application, Request, Response, application } from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
@@ -11,6 +11,9 @@ import router from './app/routes';
 import notFound from './app/middlewares/notFound';
 const app: Application = express();
 import sendContactUsEmail from './app/helper/sendContactUsEmail';
+import auth from './app/middlewares/auth';
+import { USER_ROLE } from './app/modules/user/user.constant';
+import sendAnnounsment from './app/helper/sendAnnounsment';
 // parser
 app.use(express.json());
 app.use(cookieParser());
@@ -40,7 +43,7 @@ app.use('/uploads', express.static('uploads'));
 // application routers ----------------
 app.use('/', router);
 app.post('/contact-us', sendContactUsEmail);
-
+app.post('/send-annousment', auth(USER_ROLE.superAdmin), sendAnnounsment);
 app.get('/nice', async (req, res) => {
   res.send({ message: 'nice to meet you' });
 });
